@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/ui/home/home_screen.dart';
+import 'package:movie_app/ui/onboarding/onboarding_screen.dart';
 
 import 'utils/app_routes.dart';
 
@@ -14,8 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeRouteName,
-      routes: {AppRoutes.homeRouteName: (context) => HomeScreen()},
+      initialRoute: AppRoutes.onboardingRouteName,
+      routes: {
+        AppRoutes.onboardingRouteName: (context) => OnboardingScreen(),
+        AppRoutes.homeRouteName: (context) => HomeScreen(),
+      },
     );
   }
 }
