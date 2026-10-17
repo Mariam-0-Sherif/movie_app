@@ -10,17 +10,11 @@ import 'package:movie_app/utils/app_theme.dart';
 import 'firebase_options.dart';
 import 'utils/app_routes.dart';
 
-<<<<<<< HEAD
-void main() {
-  runApp(const MyApp());
-=======
 Future<void> main() async {
+  // lazem el 2 satreen dool 3ashan el Firebase yeshtaghal abl runApp
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
->>>>>>> 326a527540ecfa455960a59b7d87621b2b61b6d9
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
