@@ -1,12 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/ui/home/home_mock_data.dart';
+import 'package:movie_app/ui/home/widgets/genre_section.dart';
+import 'package:movie_app/ui/home/widgets/home_header.dart';
+import 'package:movie_app/ui/widgets/movie_poster_card.dart';
+import 'package:movie_app/utils/app_colors.dart';
+import 'package:movie_app/utils/size_utils.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home', style: TextStyle(color: Colors.white, fontSize: 24)),
+    return ColoredBox(
+      color: AppColors.blackColor,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const HomeHeader(movies: mockMovies),
+            GenreSection(
+              title: 'Action',
+              itemCount: mockMovies.length,
+              itemBuilder: (context, index) {
+                final movie = mockMovies[index];
+                return MoviePosterCard(
+                  imageUrl: movie.imageUrl,
+                  rating: movie.rating,
+                  width: 146,
+                );
+              },
+            ),
+            SizedBox(height: SizeUtils.getHeight(context, 120)),
+          ],
+        ),
+      ),
     );
   }
 }
