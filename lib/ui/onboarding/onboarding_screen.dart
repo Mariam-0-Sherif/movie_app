@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/utils/app_colors.dart';
 import 'package:movie_app/utils/app_routes.dart';
 import 'package:movie_app/utils/size_utils.dart';
 
@@ -12,12 +13,16 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   PageController controller = PageController();
 
+  // el index bta3 el screen elly mfto7a delwa2ty
   int index = 0;
 
+  // function mo5tasara bta5od raqam el Figma w trg3o 3ala 7asab 3ard el screen
   double w(double value) => SizeUtils.getWidth(context, value);
 
+  // nafs el fekra bas lel tool
   double h(double value) => SizeUtils.getHeight(context, value);
 
+  // soor el 6 screens bel tarteeb
   List<String> images = [
     'assets/images/OnBoarding_1.png',
     'assets/images/OnBoarding_2.png',
@@ -27,6 +32,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     'assets/images/OnBoarding_6.png',
   ];
 
+  // el 3anawen bel tarteeb (el \n 3ashan el kalam yenzel satr gded zay el Figma)
   List<String> titles = [
     'Find Your Next\nFavorite Movie Here',
     'Discover Movies',
@@ -36,6 +42,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     'Start Watching Now',
   ];
 
+  // el wasf bel tarteeb (el screen el akhira fadya)
   List<String> descriptions = [
     'Get access to a huge library of movies to suit all tastes. You will surely like it.',
     'Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.',
@@ -45,9 +52,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     '',
   ];
 
+  // zorar Next: lw e7na fe a5er screen nroo7 lel login, gher keda nenta2el lel screen elly ba3daha
   void next() {
     if (index == images.length - 1) {
-      Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
+      Navigator.pushReplacementNamed(context, AppRoutes.loginRouteName);
     } else {
       controller.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -56,6 +64,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
+  // zorar Back: yrg3 screen wa7da le wara
   void back() {
     controller.previousPage(
       duration: const Duration(milliseconds: 300),
@@ -63,6 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  // lazem nfaddy el controller lama el screen telfa
   @override
   void dispose() {
     controller.dispose();
@@ -71,6 +81,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // el nas elly 3ala el zorar el asfar: awel screen Explore Now, a5er wa7da Finish, el baqi Next
     String buttonText = 'Next';
     if (index == 0) {
       buttonText = 'Explore Now';
@@ -81,6 +92,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // el soor bta3et el khalfeya, el user y3mel swipe benhom
           PageView.builder(
             controller: controller,
             itemCount: images.length,
@@ -98,6 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
           ),
 
+          // el panel elly ta7t, Align bey7oto fe a5er el screen
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -109,12 +122,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 h(24),
               ),
               decoration: BoxDecoration(
-                color: index == 0 ? null : const Color(0xFF121312),
+                // awel screen feha fade, el baqi feha sheet eswed
+                color: index == 0 ? null : AppColors.blackColor,
                 gradient: index == 0
                     ? const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, Color(0xFF121312)],
+                        colors: [
+                          AppColors.transparentColor,
+                          AppColors.blackColor,
+                        ],
                       )
                     : null,
                 borderRadius: index == 0
@@ -124,11 +141,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // el 3enwan
                   Text(
                     titles[index],
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.whiteColor,
                       fontSize: index == 0 ? w(36) : w(24),
                       fontWeight: index == 0
                           ? FontWeight.w500
@@ -136,24 +154,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
 
+                  // el wasf, bn3rdo bas lw msh fady
                   if (descriptions[index] != '') ...[
                     SizedBox(height: h(16)),
                     Text(
                       descriptions[index],
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white70, fontSize: w(18)),
+                      style: TextStyle(
+                        color: AppColors.lightGrayColor,
+                        fontSize: w(18),
+                      ),
                     ),
                   ],
 
                   SizedBox(height: h(24)),
 
+                  // zorar el next (asfar)
                   SizedBox(
                     width: double.infinity,
                     height: h(56),
                     child: ElevatedButton(
                       onPressed: next,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFBB3B),
+                        backgroundColor: AppColors.yellowColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(w(16)),
                         ),
@@ -161,13 +184,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       child: Text(
                         buttonText,
                         style: TextStyle(
-                          color: const Color(0xFF121312),
+                          color: AppColors.blackColor,
                           fontSize: w(20),
                         ),
                       ),
                     ),
                   ),
 
+                  // zorar el back, mesh bybyan fel screen el awla
                   if (index != 0) ...[
                     SizedBox(height: h(16)),
                     SizedBox(
@@ -176,7 +200,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       child: OutlinedButton(
                         onPressed: back,
                         style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Color(0xFFFFBB3B)),
+                          side: const BorderSide(color: AppColors.yellowColor),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(w(16)),
                           ),
@@ -184,7 +208,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         child: Text(
                           'Back',
                           style: TextStyle(
-                            color: const Color(0xFFFFBB3B),
+                            color: AppColors.yellowColor,
                             fontSize: w(20),
                           ),
                         ),
